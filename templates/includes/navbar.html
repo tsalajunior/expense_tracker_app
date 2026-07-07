@@ -1,0 +1,141 @@
+<nav class="navbar bg-base-100 border-b border-base-300 px-6 shadow-sm">
+
+    <!-- LEFT -->
+    <div class="navbar-start">
+
+        <!-- Mobile Sidebar Button -->
+        <label for="sidebar-drawer"
+               class="btn btn-ghost lg:hidden">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="w-6 h-6">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+            </svg>
+
+        </label>
+
+        <!-- Page Title -->
+        <h1 class="text-xl font-bold ml-2">
+
+            {% block page_title %}
+                Dashboard
+            {% endblock %}
+
+        </h1>
+
+    </div>
+
+    <!-- CENTER -->
+    <div class="navbar-center hidden lg:flex w-1/3">
+
+        <input
+            type="text"
+            placeholder="Search..."
+            class="input input-bordered w-full"/>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="navbar-end gap-3">
+
+        <!-- Theme Switcher -->
+        {% include "includes/theme_switcher.html" %}
+
+        <!-- Notifications -->
+        <button class="btn btn-ghost btn-circle">
+
+            <div class="indicator">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0018 9.75V9A6 6 0 006 9v.75a8.967 8.967 0 00-2.31 6.022c1.733.64 3.563 1.08 5.453 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+
+                </svg>
+
+                <span class="badge badge-xs badge-primary indicator-item"></span>
+
+            </div>
+
+        </button>
+
+        <!-- User Menu -->
+        <div class="dropdown dropdown-end">
+
+            <div tabindex="0"
+                 role="button"
+                 class="btn btn-ghost">
+
+                <div class="avatar placeholder">
+
+                    <div class="bg-primary text-primary-content rounded-full w-10">
+
+                        <span>
+
+                            {% if request.user.is_authenticated %}
+                                {{ request.user.first_name|first|default:request.user.username|first|upper }}
+                            {% else %}
+                                G
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <span class="hidden md:block">
+
+                    {% if request.user.is_authenticated %}
+                        {{ request.user.first_name|default:request.user.username }}
+                    {% else %}
+                        Guest
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-56 shadow">
+
+                <li>
+                    <a>👤 Profile</a>
+                </li>
+
+                <li>
+                    <a>⚙ Settings</a>
+                </li>
+
+                <li>
+                    <a>📊 Dashboard</a>
+                </li>
+
+                <div class="divider my-1"></div>
+
+                <li>
+                    <a class="text-error">
+                        🚪 Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>

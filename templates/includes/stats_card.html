@@ -1,0 +1,52 @@
+<div class="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 border border-base-200">
+
+    <div class="card-body">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center">
+
+            <h2 class="text-sm font-medium text-base-content/70">
+
+                {{ title }}
+
+            </h2>
+
+            {% if icon %}
+                <span class="text-2xl">
+
+                    {{ icon }}
+
+                </span>
+            {% endif %}
+
+        </div>
+
+        <!-- Value -->
+        <div class="mt-3">
+
+            <h3 class="text-3xl font-bold">
+
+                {{ value }}
+
+            </h3>
+
+        </div>
+
+        <!-- Footer -->
+        {% if subtitle %}
+
+            <div class="mt-4">
+
+                <span class="badge badge-{{ color|default:'primary' }} badge-outline">
+
+                    {{ subtitle }}
+
+                </span>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

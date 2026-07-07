@@ -1,0 +1,174 @@
+<aside class="min-h-full w-72 bg-base-100 border-r border-base-300 flex flex-col">
+
+    <!-- Logo -->
+    <div class="h-16 flex items-center px-6 border-b border-base-300">
+
+        <a href="/"
+           class="text-2xl font-bold text-primary">
+
+            💰 Expense Tracker
+
+        </a>
+
+    </div>
+
+    <!-- Menu -->
+    <div class="flex-1 overflow-y-auto p-4">
+
+        <ul class="menu menu-lg w-full">
+
+            <!-- Dashboard -->
+
+            <li class="menu-title">
+                <span>Main</span>
+            </li>
+
+            <li>
+                <a class="active">
+
+                    📊 Dashboard
+
+                </a>
+            </li>
+
+            <!-- Expenses -->
+
+            <li class="menu-title mt-4">
+                <span>Expenses</span>
+            </li>
+
+            <li>
+                <a>
+
+                    💸 All Expenses
+
+                </a>
+            </li>
+
+            <li>
+                <a>
+
+                    ➕ Add Expense
+
+                </a>
+            </li>
+
+            <li>
+                <a>
+
+                    📂 Categories
+
+                </a>
+            </li>
+
+            <!-- Income -->
+
+            <li class="menu-title mt-4">
+                <span>Income</span>
+            </li>
+
+            <li>
+                <a>
+
+                    💰 All Income
+
+                </a>
+            </li>
+
+            <li>
+                <a>
+
+                    ➕ Add Income
+
+                </a>
+            </li>
+
+            <!-- Reports -->
+
+            <li class="menu-title mt-4">
+                <span>Analytics</span>
+            </li>
+
+            <li>
+                <a>
+
+                    📈 Reports
+
+                </a>
+            </li>
+
+            <!-- User -->
+
+            <li class="menu-title mt-4">
+                <span>Account</span>
+            </li>
+
+            <li>
+                <a>
+
+                    👤 Profile
+
+                </a>
+            </li>
+
+            <li>
+                <a>
+
+                    ⚙ Settings
+
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="border-t border-base-300 p-5">
+
+        <div class="flex items-center gap-3">
+
+            <div class="avatar placeholder">
+
+                <div class="bg-primary text-primary-content rounded-full w-12">
+
+                    <span>
+
+                        {% if request.user.is_authenticated %}
+                            {{ request.user.first_name|first|default:request.user.username|first|upper }}
+                        {% else %}
+                            G
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <p class="font-semibold">
+
+                    {% if request.user.is_authenticated %}
+                        {{ request.user.get_full_name|default:request.user.username }}
+                    {% else %}
+                        Guest
+                    {% endif %}
+
+                </p>
+
+                <p class="text-sm opacity-70">
+
+                    Expense Tracker
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>

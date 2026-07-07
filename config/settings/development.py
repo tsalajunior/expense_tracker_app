@@ -5,6 +5,8 @@ from .base import *
 
 DEBUG = True
 
+ENVIRONMENT = "Development"
+
 ALLOWED_HOSTS = []
 
 DATABASES = {

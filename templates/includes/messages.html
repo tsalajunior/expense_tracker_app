@@ -1,0 +1,97 @@
+{% if messages %}
+
+<div class="space-y-3 mb-6">
+
+    {% for message in messages %}
+
+        <div
+            class="alert
+
+            {% if message.tags == 'success' %}
+                alert-success
+
+            {% elif message.tags == 'error' %}
+                alert-error
+
+            {% elif message.tags == 'warning' %}
+                alert-warning
+
+            {% else %}
+                alert-info
+            {% endif %}
+
+            shadow-lg relative">
+
+            <!-- Icon -->
+            <span>
+
+                {% if message.tags == 'success' %}
+
+                    ✅
+
+                {% elif message.tags == 'error' %}
+
+                    ❌
+
+                {% elif message.tags == 'warning' %}
+
+                    ⚠️
+
+                {% else %}
+
+                    ℹ️
+
+                {% endif %}
+
+            </span>
+
+            <!-- Message -->
+
+            <span class="flex-1">
+
+                {{ message }}
+
+            </span>
+
+            <!-- Close Button -->
+
+            <button
+                type="button"
+                class="btn btn-ghost btn-xs"
+                onclick="this.parentElement.remove()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    setTimeout(() => {
+
+        document.querySelectorAll(".alert").forEach(alert => {
+
+            alert.classList.add("opacity-0", "transition", "duration-500");
+
+            setTimeout(() => {
+
+                alert.remove();
+
+            }, 500);
+
+        });
+
+    }, 5000);
+
+});
+
+</script>

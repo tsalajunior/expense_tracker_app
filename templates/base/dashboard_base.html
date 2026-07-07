@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+<div class="drawer lg:drawer-open">
+
+    <!-- Toggle Sidebar (Mobile) -->
+    <input id="sidebar-drawer" type="checkbox" class="drawer-toggle">
+
+    <!-- Main Content -->
+    <div class="drawer-content flex flex-col min-h-screen">
+
+        <!-- Navbar -->
+        {% include "includes/navbar.html" %}
+
+        <!-- Notification Area -->
+        {% block notifications %}
+        {% endblock %}
+
+        <!-- Main -->
+        <main class="flex-1 p-6">
+
+            <!-- Breadcrumb -->
+            {% block breadcrumbs %}
+            {% endblock %}
+
+            <!-- Django Messages -->
+            {% include "includes/messages.html" %}
+
+            <!-- Page Content -->
+            {% block dashboard_content %}
+            {% endblock %}
+
+        </main>
+
+        <!-- Footer -->
+        {% include "includes/footer.html" %}
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="drawer-side">
+
+        <label for="sidebar-drawer"
+               aria-label="close sidebar"
+               class="drawer-overlay">
+        </label>
+
+        {% include "includes/sidebar.html" %}
+
+    </div>
+
+</div>
+
+{% endblock %}

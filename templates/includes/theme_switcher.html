@@ -1,0 +1,80 @@
+<div class="dropdown dropdown-end">
+
+    <div
+        tabindex="0"
+        role="button"
+        class="btn btn-ghost btn-circle">
+
+        <!-- Theme Icon -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5">
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.752 15.002A9.718 9.718 0 0112 21.75 9.75 9.75 0 1118.998 2.248a7.5 7.5 0 002.754 12.754z"/>
+
+        </svg>
+
+    </div>
+
+    <ul
+        tabindex="0"
+        class="dropdown-content menu bg-base-100 rounded-box shadow-lg w-52 z-50">
+
+        <li>
+            <a onclick="setTheme('light')">
+
+                ☀️ Light
+
+            </a>
+        </li>
+
+        <li>
+            <a onclick="setTheme('corporate')">
+
+                🏢 Corporate
+
+            </a>
+        </li>
+
+        <li>
+            <a onclick="setTheme('dark')">
+
+                🌙 Dark
+
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<script>
+
+function setTheme(theme){
+
+    document.documentElement.setAttribute("data-theme", theme);
+
+    localStorage.setItem("theme", theme);
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if(savedTheme){
+
+        document.documentElement.setAttribute("data-theme", savedTheme);
+
+    }
+
+});
+
+</script>
