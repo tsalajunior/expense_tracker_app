@@ -34,8 +34,8 @@ LOCAL_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.expenses",
-    "theme",
-    "apps.dashboard"
+    "apps.dashboard",
+    "theme"
 ]
 
 THIRD_PARTY_APPS = [
@@ -111,11 +111,11 @@ TEMPLATES = [
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-LOGIN_URL = "login"
+LOGIN_URL = "accounts:login"
 
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "dashboard:index"
 
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "accounts:login"
 
 
 # -----------------------------------------------------------------------------

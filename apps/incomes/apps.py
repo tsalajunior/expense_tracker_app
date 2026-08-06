@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class IncomesConfig(AppConfig):
-    name = 'incomes'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = 'apps.incomes'

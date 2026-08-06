@@ -1,0 +1,166 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+{{ page_title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+
+        <div>
+
+            <h1 class="text-3xl font-bold">
+
+                Dashboard
+
+            </h1>
+
+            <p class="text-base-content/70 mt-1">
+
+                Welcome back Here's an overview of your finances.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    {% include "includes/messages.html" %}
+
+    <!-- Statistics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        {% include "includes/stats_card.html" with title="Today's Expenses" value="₹ 0.00" subtitle="No expense today" color="error" icon="" %}
+
+        {% include "includes/stats_card.html" with title="Today's Incomes" value="₹ 0.00" subtitle="No income today" color="success" icon="" %}
+
+ 
+        {% include "includes/stats_card.html" with title="Current Balance" value="₹ 0.00" subtitle="Available balance" color="primary" icon="" %}
+
+        {% include "includes/stats_card.html" with title="Monthly Savings" value="₹ 0.00" subtitle="Savings this month" color="accent" icon="" %}
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <h2 class="card-title">
+
+                Expense Overview
+
+            </h2>
+
+            <div class="h-80 flex items-center justify-center border-2 border-dashed rounded-xl border-base-300">
+
+                <span class="text-base-content/60">
+
+                    Chart will be added here
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Transactions -->
+
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <h2 class="card-title">
+
+                Recent Transactions
+
+            </h2>
+
+            <div class="overflow-x-auto">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td colspan="4" class="text-center text-base-content/60">
+
+                                No transactions available.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <h2 class="card-title">
+
+                Quick Actions
+
+            </h2>
+
+            <div class="flex flex-wrap gap-4 mt-4">
+
+                <a href="#" class="btn btn-primary">
+
+                    + Add Expense
+
+                </a>
+
+                <a href="#" class="btn btn-success">
+
+                    + Add Income
+
+                </a>
+
+                <a href="#" class="btn btn-outline">
+
+                    View Reports
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
