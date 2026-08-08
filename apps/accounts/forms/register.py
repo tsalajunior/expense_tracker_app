@@ -28,6 +28,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password1 = forms.CharField(
+        label="password",
         widget=forms.PasswordInput(
             attrs={
                 "class": "input input-bordered w-full",
@@ -37,6 +38,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
+        label="password confirmation",
         widget=forms.PasswordInput(
             attrs={
                 "class": "input input-bordered w-full",

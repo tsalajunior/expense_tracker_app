@@ -1,0 +1,196 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}Expense Details{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs text-sm mb-6">
+    <ul>
+        <li>
+            <a href="{% url 'expenses:list' %}">
+                Expenses
+            </a>
+        </li>
+        <li>Details</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-3xl font-bold">
+            Expense Details
+        </h1>
+
+        <p class="text-base-content/60 mt-1">
+            Details of your expense.
+        </p>
+    </div>
+
+    <div class="flex gap-2">
+        <a href="{% url 'expenses:update' expense.pk %}" class="btn btn-primary">
+            Edit
+        </a>
+
+        <a href="{% url 'expenses:delete' expense.pk %}" class="btn btn-error btn-outline">
+            Delete
+        </a>
+    </div>
+</div>
+
+
+<div class="card bg-base-100 shadow">
+
+    <div class="card-body">
+
+        <!-- Title -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold">
+                {{ expense.title }}
+            </h2>
+
+            <p class="text-base-content/60">
+                Expense #{{ expense.pk }}
+            </p>
+        </div>
+
+
+        <!-- Main information -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Amount -->
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Amount
+                </p>
+
+                <p class="text-2xl font-bold text-primary">
+                    {{ expense.amount }}
+                </p>
+            </div>
+
+
+            <!-- Category -->
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Category
+                </p>
+
+                <p class="font-medium">
+                    {{ expense.category }}
+                </p>
+            </div>
+
+
+            <!-- Payment method -->
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Payment Method
+                </p>
+
+                <p class="font-medium">
+                    {{ expense.payment_method }}
+                </p>
+            </div>
+
+
+            <!-- Date -->
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Date
+                </p>
+
+                <p class="font-medium">
+                    {{ expense.expense_date }}
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Description -->
+        <div class="mb-6">
+
+            <h3 class="font-semibold mb-2">
+                Description
+            </h3>
+
+            {% if expense.description %}
+            <p class="whitespace-pre-line text-base-content/80">
+                {{ expense.description }}
+            </p>
+            {% else %}
+            <p class="text-base-content/50 italic">
+                No description provided.
+            </p>
+            {% endif %}
+
+        </div>
+
+
+        <!-- Receipt -->
+        <div>
+
+            <h3 class="font-semibold mb-2">
+                Receipt
+            </h3>
+
+            {% if expense.receipt %}
+
+            <div class="flex items-center gap-3">
+
+                <span class="badge badge-success">
+                    PDF attached
+                </span>
+
+                <a href="{{ expense.receipt.url }}" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-sm btn-outline">
+                    View receipt
+                </a>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-base-content/50 italic">
+                No receipt attached.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Actions -->
+        <div class="flex justify-between items-center">
+
+            <a href="{% url 'expenses:list' %}" class="btn btn-ghost">
+                ← Back to Expenses
+            </a>
+
+            <div class="flex gap-2">
+
+                <a href="{% url 'expenses:update' expense.pk %}" class="btn btn-primary">
+                    Edit Expense
+                </a>
+
+                <a href="{% url 'expenses:delete' expense.pk %}" class="btn btn-error">
+                    Delete Expense
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

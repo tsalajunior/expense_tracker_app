@@ -6,8 +6,8 @@ A modern Expense Tracker built with Django.
 
 - Django
 - PostgreSQL
-- Tailwind CSS
-- DaisyUI
+- Tailwind CSS 3.4.x
+- DaisyUI 4.12.x
 - Chart.js
 
 ## Features
@@ -22,8 +22,10 @@ A modern Expense Tracker built with Django.
 
 ## Screenshots
 
-Coming soon...
+![1786187988033](image/README/1786187988033.png)![1786188002152](image/README/1786188002152.png)
+
+
 
 ## Project Status
 
-🚧 In Progress
+🚧 In Progress 20%

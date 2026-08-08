@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
-
+from decimal import Decimal
+from django.core.validators import MinValueValidator
 from apps.core.models import BaseModel
 
 from .category import ExpenseCategory
@@ -31,13 +32,16 @@ class Expense(BaseModel):
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=2,
+        validators=[
+            MinValueValidator(Decimal("0.01"))
+        ],
     )
 
     expense_date = models.DateField()
 
     description = models.TextField(blank=True)
 
-    receipt = models.ImageField(
+    receipt = models.FileField(
         upload_to="receipts/",
         blank=True,
         null=True,

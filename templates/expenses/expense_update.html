@@ -1,0 +1,250 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}Edit Expense{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs text-sm mb-6">
+    <ul>
+        <li>
+            <a href="{% url 'expenses:list' %}">
+                Expenses
+            </a>
+        </li>
+        <li>
+            Edit
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl mx-auto">
+
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold">
+            Edit Expense
+        </h1>
+
+        <p class="text-base-content/60 mt-1">
+            Update the information of this expense.
+        </p>
+    </div>
+
+
+    <div class="card bg-base-100 shadow">
+
+        <div class="card-body">
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <!-- Non-field errors -->
+                {% if form.non_field_errors %}
+                <div class="alert alert-error mb-6">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+
+                <!-- Title -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Title
+                        </span>
+                    </label>
+
+                    {{ form.title }}
+
+                    {% if form.title.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.title.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Category -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Category
+                        </span>
+                    </label>
+
+                    {{ form.category }}
+
+                    {% if form.category.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.category.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Payment method -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Payment Method
+                        </span>
+                    </label>
+
+                    {{ form.payment_method }}
+
+                    {% if form.payment_method.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.payment_method.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Amount -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Amount
+                        </span>
+                    </label>
+
+                    {{ form.amount }}
+
+                    {% if form.amount.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.amount.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Date -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Date
+                        </span>
+                    </label>
+
+                    {{ form.expense_date }}
+
+                    {% if form.expense_date.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.expense_date.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-control mb-4">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Description
+                        </span>
+                    </label>
+
+                    {{ form.description }}
+
+                    {% if form.description.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.description.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Receipt -->
+                <div class="form-control mb-6">
+
+                    <label class="label">
+                        <span class="label-text">
+                            Receipt (PDF)
+                        </span>
+                    </label>
+
+                    {% if expense.receipt %}
+
+                    <div class="mb-3">
+                        <p class="text-sm text-base-content/60 mb-2">
+                            Current receipt:
+                        </p>
+
+                        <a href="{{ expense.receipt.url }}" target="_blank" rel="noopener noreferrer"
+                            class="link link-primary">
+                            View current receipt
+                        </a>
+                    </div>
+
+                    {% endif %}
+
+                    {{ form.receipt }}
+
+                    {% if form.receipt.help_text %}
+                    <label class="label">
+                        <span class="label-text-alt text-base-content/60">
+                            {{ form.receipt.help_text }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                    {% if form.receipt.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.receipt.errors }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Actions -->
+                <div class="flex justify-end gap-3">
+
+                    <a href="{% url 'expenses:detail' expense.pk %}" class="btn btn-ghost">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
