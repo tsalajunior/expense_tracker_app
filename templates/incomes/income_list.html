@@ -1,0 +1,123 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Incomes
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+
+    <div>
+        <h1 class="text-3xl font-bold">
+            Incomes
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Manage your income transactions.
+        </p>
+    </div>
+
+    <a href="{% url 'incomes:create' %}" class="btn btn-success mt-4 md:mt-0">
+
+        + Add Income
+
+    </a>
+
+</div>
+
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        {% if incomes %}
+
+        <div class="overflow-x-auto">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for income in incomes %}
+
+                    <tr>
+
+                        <td>
+                            {{ income.income_date|date:"M d, Y" }}
+                        </td>
+
+                        <td>
+                            {{ income.category.name }}
+                        </td>
+
+                        <td>
+                            {{ income.title }}
+                        </td>
+
+                        <td class="font-semibold text-success">
+                            ₹ {{ income.amount }}
+                        </td>
+                        <td>
+                            <div class="flex gap-2">
+
+                                <a href="{% url 'incomes:detail' income.pk %}" class="btn btn-sm btn-outline">
+                                    View
+                                </a>
+
+                                <a href="{% url 'incomes:update' income.pk %}" class="btn btn-sm btn-primary">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'incomes:delete' income.pk %}" class="btn btn-sm btn-error btn-outline">
+                                    Delete
+                                </a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="py-12 text-center">
+
+            <p colspan="5" class="text-base-content/60">
+                No incomes available.
+            </p>
+
+            <a href="{% url 'incomes:create' %}" class="btn btn-success mt-4">
+
+                Add your first income
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

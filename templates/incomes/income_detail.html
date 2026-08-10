@@ -1,0 +1,157 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Income Details
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+        <div>
+            <h1 class="text-3xl font-bold">
+                Income Details
+            </h1>
+
+            <p class="text-base-content/70 mt-1">
+                View the details of this income.
+            </p>
+        </div>
+
+        <!-- Back -->
+        <a href="{% url 'incomes:list' %}" class="btn btn-ghost">
+            ← Back to incomes
+        </a>
+
+    </div>
+
+
+    <!-- Income Card -->
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <!-- Title -->
+            <div class="mb-6">
+
+                <h2 class="text-2xl font-bold">
+                    {{ income.title }}
+                </h2>
+
+                <span class="badge badge-success badge-outline mt-2">
+                    Income
+                </span>
+
+            </div>
+
+
+            <!-- Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Category -->
+                <div>
+
+                    <p class="text-sm text-base-content/60">
+                        Category
+                    </p>
+
+                    <p class="font-medium mt-1">
+                        {{ income.category.name }}
+                    </p>
+
+                </div>
+
+
+                <!-- Amount -->
+                <div>
+
+                    <p class="text-sm text-base-content/60">
+                        Amount
+                    </p>
+
+                    <p class="text-2xl font-bold text-success mt-1">
+                        ₹ {{ income.amount }}
+                    </p>
+
+                </div>
+
+
+                <!-- Date -->
+                <div>
+
+                    <p class="text-sm text-base-content/60">
+                        Date
+                    </p>
+
+                    <p class="font-medium mt-1">
+                        {{ income.income_date|date:"M d, Y" }}
+                    </p>
+
+                </div>
+
+
+                <!-- Created -->
+                <div>
+
+                    <p class="text-sm text-base-content/60">
+                        Recorded on
+                    </p>
+
+                    <p class="font-medium mt-1">
+                        {{ income.created_at|date:"M d, Y H:i" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Description -->
+            {% if income.description %}
+
+            <div class="mt-6">
+
+                <p class="text-sm text-base-content/60">
+                    Description
+                </p>
+
+                <div class="mt-2 p-4 bg-base-200 rounded-lg">
+
+                    <p class="whitespace-pre-line">
+                        {{ income.description }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- Actions -->
+            <div class="flex flex-wrap justify-end gap-3 mt-8 pt-6 border-t border-base-300">
+
+                <a href="{% url 'incomes:list' %}" class="btn btn-ghost">
+                    ← Back
+                </a>
+
+                <a href="{% url 'incomes:update' income.pk %}" class="btn btn-warning">
+                    Edit
+                </a>
+
+                <a href="{% url 'incomes:delete' income.pk %}" class="btn btn-error">
+                    Delete
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

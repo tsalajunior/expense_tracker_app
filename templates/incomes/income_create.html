@@ -1,0 +1,179 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Add Income
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-6">
+
+        <h1 class="text-3xl font-bold">
+            Add Income
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Record a new income.
+        </p>
+
+    </div>
+
+    <!-- Form Card -->
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-error mb-6">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <!-- Category -->
+                <div class="form-control mb-4">
+
+                    <label for="{{ form.category.id_for_label }}" class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.category.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.category }}
+
+                    {% if form.category.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.category.errors|striptags }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+                <!-- Title -->
+                <div class="form-control mb-4">
+
+                    <label for="{{ form.title.id_for_label }}" class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.title.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.title }}
+
+                    {% if form.title.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.title.errors|striptags }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+                <!-- Amount -->
+                <div class="form-control mb-4">
+
+                    <label for="{{ form.amount.id_for_label }}" class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.amount.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.amount }}
+
+                    {% if form.amount.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.amount.errors|striptags }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+                <!-- Date -->
+                <div class="form-control mb-4">
+
+                    <label for="{{ form.income_date.id_for_label }}" class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.income_date.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.income_date }}
+
+                    {% if form.income_date.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.income_date.errors|striptags }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+                <!-- Description -->
+                <div class="form-control mb-6">
+
+                    <label for="{{ form.description.id_for_label }}" class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.description.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.description }}
+
+                    {% if form.description.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            {{ form.description.errors|striptags }}
+                        </span>
+                    </label>
+                    {% endif %}
+
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-end gap-3">
+
+                    <a href="{% url 'incomes:list' %}" class="btn btn-outline">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit" class="btn btn-success">
+
+                        Add Income
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

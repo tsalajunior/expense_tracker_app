@@ -1,174 +1,156 @@
-<aside class="min-h-full w-72 bg-base-100 border-r border-base-300 flex flex-col">
+<!-- Logo -->
+<div class="h-16 flex items-center px-6 border-b border-base-300">
 
-    <!-- Logo -->
-    <div class="h-16 flex items-center px-6 border-b border-base-300">
+    <a
+        href="{% url 'dashboard:index' %}"
+        class="text-2xl font-bold text-primary"
+    >
+        Expense Tracker App
+    </a>
 
-        <a href="/"
-           class="text-2xl font-bold text-primary">
+</div>
 
-            Expense Tracker
 
-        </a>
+<!-- Menu -->
+<div class="flex-1 overflow-y-auto p-4">
 
-    </div>
+    <ul class="menu menu-lg w-full">
 
-    <!-- Menu -->
-    <div class="flex-1 overflow-y-auto p-4">
+        <!-- Dashboard -->
 
-        <ul class="menu menu-lg w-full">
+        <li class="menu-title">
+            <span>Main</span>
+        </li>
 
-            <!-- Dashboard -->
+        <li>
+            <a href="{% url 'dashboard:index' %}">
+                Dashboard
+            </a>
+        </li>
 
-            <li class="menu-title">
-                <span>Main</span>
-            </li>
 
-            <li>
-                <a class="active">
+        <!-- Expenses -->
 
-                    Dashboard
+        <li class="menu-title mt-4">
+            <span>Expenses</span>
+        </li>
 
-                </a>
-            </li>
+        <li>
+            <a href="{% url 'expenses:list' %}">
+                All Expenses
+            </a>
+        </li>
 
-            <!-- Expenses -->
+        <li>
+            <a href="{% url 'expenses:create' %}">
+                Add Expense
+            </a>
+        </li>
 
-            <li class="menu-title mt-4">
-                <span>Expenses</span>
-            </li>
+        <li>
+            <a href="#">
+                Categories
+            </a>
+        </li>
 
-            <li>
-                <a>
 
-                    All Expenses
+        <!-- Income -->
 
-                </a>
-            </li>
+        <li class="menu-title mt-4">
+            <span>Income</span>
+        </li>
 
-            <li>
-                <a>
+        <li>
+            <a href="{% url 'incomes:list' %}">
+                All Income
+            </a>
+        </li>
 
-                    Add Expense
+        <li>
+            <a href="{% url 'incomes:create' %}">
+                Add Income
+            </a>
+        </li>
 
-                </a>
-            </li>
 
-            <li>
-                <a>
+        <!-- Reports -->
 
-                    Categories
+        <li class="menu-title mt-4">
+            <span>Analytics</span>
+        </li>
 
-                </a>
-            </li>
+        <li>
+            <a href="#">
+                Reports
+            </a>
+        </li>
 
-            <!-- Income -->
 
-            <li class="menu-title mt-4">
-                <span>Income</span>
-            </li>
+        <!-- User -->
 
-            <li>
-                <a>
+        <li class="menu-title mt-4">
+            <span>Account</span>
+        </li>
 
-                    All Income
+        <li>
+            <a href="#">
+                Profile
+            </a>
+        </li>
 
-                </a>
-            </li>
+        <li>
+            <a href="#">
+                Settings
+            </a>
+        </li>
 
-            <li>
-                <a>
+    </ul>
 
-                    Add Income
+</div>
 
-                </a>
-            </li>
 
-            <!-- Reports -->
+<!-- Footer -->
 
-            <li class="menu-title mt-4">
-                <span>Analytics</span>
-            </li>
+<div class="border-t border-base-300 p-5">
 
-            <li>
-                <a>
+    <div class="flex items-center gap-3">
 
-                    Reports
+        <div class="avatar placeholder">
 
-                </a>
-            </li>
+            <div class="bg-primary text-primary-content rounded-full w-12">
 
-            <!-- User -->
-
-            <li class="menu-title mt-4">
-                <span>Account</span>
-            </li>
-
-            <li>
-                <a>
-
-                    Profile
-
-                </a>
-            </li>
-
-            <li>
-                <a>
-
-                    Settings
-
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-    <!-- Footer -->
-
-    <div class="border-t border-base-300 p-5">
-
-        <div class="flex items-center gap-3">
-
-            <div class="avatar placeholder">
-
-                <div class="bg-primary text-primary-content rounded-full w-12">
-
-                    <span>
-
-                        {% if request.user.is_authenticated %}
-                            {{ request.user.first_name|first|default:request.user.username|first|upper }}
-                        {% else %}
-                            G
-                        {% endif %}
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <p class="font-semibold">
+                <span>
 
                     {% if request.user.is_authenticated %}
-                        {{ request.user.get_full_name|default:request.user.username }}
+                        {{ request.user.first_name|first|default:request.user.username|first|upper }}
                     {% else %}
-                        Guest
+                        G
                     {% endif %}
 
-                </p>
-
-                <p class="text-sm opacity-70">
-
-                    Expense Tracker
-
-                </p>
+                </span>
 
             </div>
 
         </div>
 
+        <div>
+
+            <p class="font-semibold">
+
+                {% if request.user.is_authenticated %}
+                    {{ request.user.get_full_name|default:request.user.username }}
+                {% else %}
+                    Guest
+                {% endif %}
+
+            </p>
+
+            <p class="text-sm opacity-70">
+                Expense Tracker
+            </p>
+
+        </div>
+
     </div>
 
-</aside>
+</div>

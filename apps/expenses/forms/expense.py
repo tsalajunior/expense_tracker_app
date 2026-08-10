@@ -1,7 +1,6 @@
 from decimal import Decimal
-
+from django.utils import timezone
 from django import forms
-
 from apps.expenses.models import Expense
 
 
@@ -55,6 +54,7 @@ class ExpenseForm(forms.ModelForm):
                 attrs={
                     "class": "input input-bordered w-full",
                     "type": "date",
+                    "max": timezone.localdate().isoformat(),
                 }
             ),
             "description": forms.Textarea(
@@ -85,6 +85,17 @@ class ExpenseForm(forms.ModelForm):
         help_texts = {
             "receipt": "Optional. Upload your receipt in PDF format.",
         }
+
+    def clean_expense_date(self):
+        expense_date = self.cleaned_data["expense_date"]
+        today = timezone.localdate()
+
+        if expense_date > today:
+            raise forms.ValidationError(
+                "The expense date cannot be in the future."
+            )
+
+        return expense_date
 
     def clean_amount(self):
         amount = self.cleaned_data["amount"]
