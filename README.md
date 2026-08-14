@@ -28,4 +28,4 @@ A modern Expense Tracker built with Django.
 
 ## Project Status
 
-🚧 In Progress 20%
+🚧 In Progress 40%
