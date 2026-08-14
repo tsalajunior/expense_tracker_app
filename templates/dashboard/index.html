@@ -37,11 +37,11 @@
 
         {% include "includes/stats_card.html" with title="Today's Expenses" value=today_expenses_total subtitle="Today" color="error" icon="" %}
 
-        {% include "includes/stats_card.html" with title="Monthly Expenses" value=month_expenses_total subtitle="This month" color="warning" icon="" %}
+        {% include "includes/stats_card.html" with title="Today's Income" value=today_incomes_total subtitle="Today" color="success" icon="" %}
 
-        {% include "includes/stats_card.html" with title="Transactions" value=month_expenses_count subtitle="This month" color="primary" icon="" %}
+        {% include "includes/stats_card.html" with title="Monthly Balance" value=current_balance subtitle="This month" color="primary" icon="" %}
 
-        {% include "includes/stats_card.html" with title="Monthly Savings" value="₹ 0.00" subtitle="Coming soon" color="accent" icon="" %}
+        {% include "includes/stats_card.html" with title="Monthly Savings" value="₹ 0.00" subtitle="This month" color="accent" icon="" %}
 
     </div>
 
@@ -84,12 +84,6 @@
             </h2>
 
             <div class="overflow-x-auto">
-                <!-- <p class="text-error">
-                    Nombre de dépenses : {{ recent_expenses|length }}
-                </p>
-                <p class="text-error">
-                    Total aujourd'hui : {{ today_expenses_total }}
-                </p> -->
                 <table class="table">
 
                     <thead>
@@ -99,7 +93,7 @@
                             <th>Date</th>
                             <th>Category</th>
                             <th>Amount</th>
-                            <th>Status</th>
+                            <th>Type</th>
 
                         </tr>
 
@@ -107,28 +101,54 @@
 
                     <tbody>
 
-                        {% if recent_expenses %}
+                        {% if recent_transactions %}
 
-                        {% for expense in recent_expenses %}
+                        {% for transaction in recent_transactions %}
 
                         <tr>
 
                             <td>
-                                {{ expense.expense_date|date:"M d, Y" }}
+                                {% if transaction.expense_date %}
+                                {{ transaction.expense_date|date:"M d, Y" }}
+                                {% else %}
+                                {{ transaction.income_date|date:"M d, Y" }}
+                                {% endif %}
                             </td>
 
                             <td>
-                                {{ expense.category.name }}
+                                {{ transaction.category.name }}
                             </td>
 
                             <td class="font-semibold">
-                                ₹ {{ expense.amount }}
+
+                                {% if transaction.expense_date %}
+                                <span class="text-error">
+                                    - ₹ {{ transaction.amount }}
+                                </span>
+                                {% else %}
+                                <span class="text-success">
+                                    + ₹ {{ transaction.amount }}
+                                </span>
+                                {% endif %}
+
                             </td>
 
                             <td>
+
+                                {% if transaction.expense_date %}
+
                                 <span class="badge badge-error badge-outline">
                                     Expense
                                 </span>
+
+                                {% else %}
+
+                                <span class="badge badge-success badge-outline">
+                                    Income
+                                </span>
+
+                                {% endif %}
+
                             </td>
 
                         </tr>

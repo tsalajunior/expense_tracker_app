@@ -1,0 +1,91 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+{{ category.name }}
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="flex items-center justify-between mb-6">
+
+    <div>
+        <h1 class="text-3xl font-bold">
+            {{ category.name }}
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Income category details.
+        </p>
+    </div>
+
+    <a href="{% url 'incomes:category_list' %}" class="btn btn-ghost">
+        ← Back
+    </a>
+
+</div>
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Name
+                </p>
+
+                <p class="font-semibold text-lg">
+                    {{ category.name }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Slug
+                </p>
+
+                <p class="font-semibold">
+                    {{ category.slug }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Icon
+                </p>
+
+                <p class="font-semibold">
+                    {{ category.icon|default:"—" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm text-base-content/60">
+                    Color
+                </p>
+
+                <p class="font-semibold">
+                    {{ category.color|default:"—" }}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card-actions justify-end mt-8">
+
+            <a href="{% url 'incomes:category_update' category.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'incomes:category_delete' category.pk %}" class="btn btn-error">
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

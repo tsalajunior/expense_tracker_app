@@ -1,10 +1,7 @@
 <!-- Logo -->
 <div class="h-16 flex items-center px-6 border-b border-base-300">
 
-    <a
-        href="{% url 'dashboard:index' %}"
-        class="text-2xl font-bold text-primary"
-    >
+    <a href="{% url 'dashboard:index' %}" class="text-2xl font-bold text-primary">
         Expense Tracker App
     </a>
 
@@ -48,7 +45,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{% url 'expenses:category_list' %}">
                 Categories
             </a>
         </li>
@@ -69,6 +66,11 @@
         <li>
             <a href="{% url 'incomes:create' %}">
                 Add Income
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'incomes:category_list' %}">
+                Categories
             </a>
         </li>
 
@@ -122,9 +124,9 @@
                 <span>
 
                     {% if request.user.is_authenticated %}
-                        {{ request.user.first_name|first|default:request.user.username|first|upper }}
+                    {{ request.user.first_name|first|default:request.user.username|first|upper }}
                     {% else %}
-                        G
+                    G
                     {% endif %}
 
                 </span>
@@ -138,9 +140,9 @@
             <p class="font-semibold">
 
                 {% if request.user.is_authenticated %}
-                    {{ request.user.get_full_name|default:request.user.username }}
+                {{ request.user.get_full_name|default:request.user.username }}
                 {% else %}
-                    Guest
+                Guest
                 {% endif %}
 
             </p>

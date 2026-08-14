@@ -9,9 +9,9 @@ class ExpenseCategory(BaseModel):
 
     slug = models.SlugField(unique=True)
 
-    icon = models.CharField(max_length=50)
+    icon = models.CharField(max_length=50, blank=True,)
 
-    color = models.CharField(max_length=20)
+    color = models.CharField(max_length=20, blank=True,)
 
     class Meta:
         ordering = ["name"]

@@ -1,0 +1,127 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Expense Categories
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+    <div>
+        <h1 class="text-3xl font-bold">
+            Expense Categories
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Manage your expense categories.
+        </p>
+    </div>
+
+    <a href="{% url 'expenses:category_create' %}" class="btn btn-primary">
+        + Add Category
+    </a>
+
+</div>
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        {% if categories %}
+
+        <div class="overflow-x-auto">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Icon</th>
+                        <th>Color</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for category in categories %}
+
+                    <tr>
+
+                        <td class="font-semibold">
+                            {{ category.name }}
+                        </td>
+
+                        <td>
+                            {{ category.slug }}
+                        </td>
+
+                        <td>
+                            {{ category.icon }}
+                        </td>
+
+                        <td>
+                            {{ category.color }}
+                        </td>
+
+                        <td>
+
+                            <div class="flex justify-end gap-2">
+
+                                <a href="{% url 'expenses:category_detail' category.pk %}" class="btn btn-sm btn-outline">
+                                    View
+                                </a>
+
+                                <a href="{% url 'expenses:category_update' category.pk %}"
+                                    class="btn btn-sm btn-outline btn-primary">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'expenses:category_delete' category.pk %}"
+                                    class="btn btn-sm btn-outline btn-error">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center py-12">
+
+            <h2 class="text-xl font-semibold">
+                No expense categories
+            </h2>
+
+            <p class="text-base-content/60 mt-2">
+                Create your first expense category to get started.
+            </p>
+
+            <a href="{% url 'expenses:category_create' %}" class="btn btn-primary mt-6">
+                + Add Category
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

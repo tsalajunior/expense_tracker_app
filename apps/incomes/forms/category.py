@@ -1,12 +1,12 @@
 from django import forms
 
-from apps.expenses.models import ExpenseCategory
+from apps.incomes.models import IncomeCategory
 
 
-class ExpenseCategoryForm(forms.ModelForm):
+class IncomeCategoryForm(forms.ModelForm):
 
     class Meta:
-        model = ExpenseCategory
+        model = IncomeCategory
 
         fields = [
             "name",
