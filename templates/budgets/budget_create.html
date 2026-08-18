@@ -1,0 +1,193 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Create Budget
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl mx-auto">
+
+    <!-- Header -->
+
+    <div class="mb-6">
+
+        <h1 class="text-3xl font-bold">
+            Create Monthly Budget
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Set a spending limit for an expense category.
+        </p>
+
+    </div>
+
+    <!-- Form -->
+
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+
+                <div class="alert alert-error mb-6">
+
+                    <div>
+
+                        {% for error in form.non_field_errors %}
+
+                        <p>
+                            {{ error }}
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                <!-- Category -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.category.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.category }}
+
+                    {% if form.category.errors %}
+
+                    <div class="text-error text-sm mt-1">
+
+                        {{ form.category.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- Amount -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.amount.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.amount }}
+
+                    {% if form.amount.help_text %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-base-content/60">
+                            {{ form.amount.help_text }}
+                        </span>
+
+                    </label>
+
+                    {% endif %}
+
+                    {% if form.amount.errors %}
+
+                    <div class="text-error text-sm mt-1">
+
+                        {{ form.amount.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- Month -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.month.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.month }}
+
+                    {% if form.month.errors %}
+
+                    <div class="text-error text-sm mt-1">
+
+                        {{ form.month.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- Year -->
+
+                <div class="form-control mb-8">
+
+                    <label class="label">
+
+                        <span class="label-text font-medium">
+                            {{ form.year.label }}
+                        </span>
+
+                    </label>
+
+                    {{ form.year }}
+
+                    {% if form.year.errors %}
+
+                    <div class="text-error text-sm mt-1">
+
+                        {{ form.year.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- Actions -->
+
+                <div class="flex justify-end gap-3 mt-10">
+
+                    <a href="{% url 'budgets:list' %}" class="btn btn-outline">
+                        ← Back
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        Create Budget
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

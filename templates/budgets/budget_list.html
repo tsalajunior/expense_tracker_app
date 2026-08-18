@@ -1,0 +1,183 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Budgets
+{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Header -->
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+    <div>
+
+        <h1 class="text-3xl font-bold">
+            Monthly Budgets
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            Manage your monthly spending limits.
+        </p>
+
+    </div>
+
+    <a href="{% url 'budgets:create' %}" class="btn btn-primary">
+        + Add Budget
+    </a>
+
+</div>
+
+
+<!-- Budgets -->
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        {% if budgets %}
+
+        <div class="overflow-x-auto">
+
+            <table class="table table-zebra">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Category</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Budget</th>
+                        <th>Created</th>
+                        <th class="text-right">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for budget in budgets %}
+
+                    <tr>
+
+                        <!-- Category -->
+
+                        <td>
+
+                            <div class="flex items-center gap-3">
+
+                                {% if budget.category.icon %}
+
+                                <span class="text-xl">
+                                    {{ budget.category.icon }}
+                                </span>
+
+                                {% endif %}
+
+                                <div>
+
+                                    <div class="font-medium">
+                                        {{ budget.category.name }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- Month -->
+
+                        <td>
+                            {{ budget.get_month_display }}
+                        </td>
+
+
+                        <!-- Year -->
+
+                        <td>
+                            {{ budget.year }}
+                        </td>
+
+
+                        <!-- Amount -->
+
+                        <td class="font-semibold">
+                            ₹ {{ budget.amount|floatformat:2 }}
+                        </td>
+
+
+                        <!-- Created -->
+
+                        <td>
+                            {{ budget.created_at|date:"M d, Y" }}
+                        </td>
+
+
+                        <!-- Actions -->
+
+                        <td>
+
+                            <div class="flex justify-end gap-2">
+
+                                <a href="{% url 'budgets:detail' budget.pk %}" class="btn btn-sm btn-outline"
+                                    title="View">
+                                    View
+                                </a>
+
+                                <a href="{% url 'budgets:update' budget.pk %}" class="btn btn-sm btn-primary" title="Edit">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'budgets:delete' budget.pk %}" class="btn btn-sm btn-error btn-outline" title="Delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <!-- Empty state -->
+
+        <div class="py-16 text-center">
+
+            <div class="text-5xl mb-4">
+                💰
+            </div>
+
+            <h2 class="text-xl font-semibold">
+                No budgets yet
+            </h2>
+
+            <p class="text-base-content/60 mt-2">
+                Start by creating your first monthly budget.
+            </p>
+
+            <a href="{% url 'budgets:create' %}" class="btn btn-primary mt-6">
+                + Create Budget
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

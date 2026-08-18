@@ -1,0 +1,208 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Edit Budget
+{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Header -->
+
+<div class="mb-6">
+
+    <h1 class="text-3xl font-bold">
+        Edit Budget
+    </h1>
+
+    <p class="text-base-content/70 mt-1">
+        Update your monthly budget.
+    </p>
+
+</div>
+
+
+<!-- Form -->
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        <form method="post" class="gap-2">
+
+            {% csrf_token %}
+
+
+            <!-- Non-field errors -->
+
+            {% if form.non_field_errors %}
+
+            <div class="alert alert-error mb-6">
+
+                <div>
+
+                    {% for error in form.non_field_errors %}
+
+                    <p>{{ error }}</p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- Category -->
+
+            <div class="form-control mb-5">
+
+                <label for="{{ form.category.id_for_label }}" class="label">
+
+                    <span class="label-text font-semibold">
+                        Category
+                    </span>
+
+                </label>
+
+                {{ form.category }}
+
+                {% if form.category.errors %}
+
+                <label class="label">
+
+                    {% for error in form.category.errors %}
+
+                    <span class="label-text-alt text-error">
+                        {{ error }}
+                    </span>
+
+                    {% endfor %}
+
+                </label>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Month -->
+
+            <div class="form-control mb-5">
+
+                <label for="{{ form.month.id_for_label }}" class="label">
+
+                    <span class="label-text font-semibold">
+                        Month
+                    </span>
+
+                </label>
+
+                {{ form.month }}
+
+                {% if form.month.errors %}
+
+                <label class="label">
+
+                    {% for error in form.month.errors %}
+
+                    <span class="label-text-alt text-error">
+                        {{ error }}
+                    </span>
+
+                    {% endfor %}
+
+                </label>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Year -->
+
+            <div class="form-control mb-5">
+
+                <label for="{{ form.year.id_for_label }}" class="label">
+
+                    <span class="label-text font-semibold">
+                        Year
+                    </span>
+
+                </label>
+
+                {{ form.year }}
+
+                {% if form.year.errors %}
+
+                <label class="label">
+
+                    {% for error in form.year.errors %}
+
+                    <span class="label-text-alt text-error">
+                        {{ error }}
+                    </span>
+
+                    {% endfor %}
+
+                </label>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Amount -->
+
+            <div class="form-control mb-8">
+
+                <label for="{{ form.amount.id_for_label }}" class="label">
+
+                    <span class="label-text font-semibold">
+                        Budget Amount
+                    </span>
+
+                </label>
+
+                {{ form.amount }}
+
+                {% if form.amount.errors %}
+
+                <label class="label">
+
+                    {% for error in form.amount.errors %}
+
+                    <span class="label-text-alt text-error">
+                        {{ error }}
+                    </span>
+
+                    {% endfor %}
+
+                </label>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="flex justify-end gap-3 mt-10">
+
+                <a href="{% url 'budgets:detail' budget.pk %}" class="btn btn-outline">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

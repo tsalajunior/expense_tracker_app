@@ -1,9 +1,19 @@
+{% load static %}
+
 <!-- Logo -->
 <div class="h-16 flex items-center px-6 border-b border-base-300">
 
-    <a href="{% url 'dashboard:index' %}" class="text-2xl font-bold text-primary">
-        Expense Tracker App
+    <a href="{% url 'dashboard:dashboard' %}" class="flex justify-between items-center gap-2 text-2xl font-bold text-primary">
+        <img
+        src="{% static 'images/LOGO.png' %}"
+        alt="Expense Tracker"
+        class="h-50 w-10"
+    >
+        Expense Tracker
     </a>
+    <!-- <a href="{% url 'dashboard:dashboard' %}" class="text-primary text-bold text-xl">
+        Expense Tracker
+    </a> -->
 
 </div>
 
@@ -20,7 +30,7 @@
         </li>
 
         <li>
-            <a href="{% url 'dashboard:index' %}">
+            <a href="{% url 'dashboard:dashboard' %}">
                 Dashboard
             </a>
         </li>
@@ -74,6 +84,24 @@
             </a>
         </li>
 
+
+        <!-- Budgets -->
+
+        <li class="menu-title mt-4">
+            <span>Planning</span>
+        </li>
+
+        <li>
+            <a href="{% url 'budgets:list' %}">
+                Monthly Budgets
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'budgets:create' %}">
+                Add Budget
+            </a>
+        </li>
 
         <!-- Reports -->
 

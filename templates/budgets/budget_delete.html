@@ -1,0 +1,115 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Delete Budget
+{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Header -->
+
+<div class="mb-6">
+
+    <h1 class="text-3xl font-bold">
+        Delete Budget
+    </h1>
+
+    <p class="text-base-content/70 mt-1">
+        Confirm the deletion of this monthly budget.
+    </p>
+
+</div>
+
+
+<!-- Confirmation Card -->
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        <div class="alert alert-warning w-50">
+
+            <div>
+
+                <h3 class="font-bold">
+                    Are you sure?
+                </h3>
+
+                <p class="mt-1">
+                    This action cannot be undone.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Budget information -->
+
+        <div class="mt-6 p-5 rounded-xl bg-base-200 mb-10">
+
+            <div class="flex items-center gap-4">
+
+                {% if budget.category.icon %}
+
+                <div class="text-4xl">
+                    {{ budget.category.icon }}
+                </div>
+
+                {% endif %}
+
+                <div>
+
+                    <h2 class="text-xl font-bold">
+                        {{ budget.category.name }}
+                    </h2>
+
+                    <p class="text-base-content/60">
+                        {{ budget.get_month_display }} {{ budget.year }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="mt-5">
+
+                <p class="text-sm text-base-content/60">
+                    Budget amount
+                </p>
+
+                <p class="text-2xl font-bold">
+                    ₹ {{ budget.amount|floatformat:2 }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="flex flex-wrap justify-end gap-3 mt-10 pt-6 border-t border-base-300">
+
+                <a href="{% url 'budgets:detail' budget.pk %}" class="btn btn-outline">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-outline btn-error">
+                    Delete Budget
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

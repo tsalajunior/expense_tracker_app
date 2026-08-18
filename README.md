@@ -22,9 +22,11 @@ A modern Expense Tracker built with Django.
 
 ## Screenshots
 
-![1786720000336](image/README/1786720000336.png)
+![1787019931665](image/README/1787019931665.png)
 
-![1786729998643](image/README/1786729998643.png)
+![1787019938779](image/README/1787019938779.png)
+
+![1787020007772](image/README/1787020007772.png)
 
 ## Project Status
 

@@ -1,0 +1,164 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Budget Details
+{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Header -->
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+    <div>
+
+        <h1 class="text-3xl font-bold">
+            Budget Details
+        </h1>
+
+        <p class="text-base-content/70 mt-1">
+            View the details of this monthly budget.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Budget Card -->
+
+<div class="card bg-base-100 shadow-md">
+
+    <div class="card-body">
+
+        <!-- Category -->
+
+        <div class="flex items-center gap-4 pb-6 border-b border-base-300">
+
+            {% if budget.category.icon %}
+
+            <div class="text-4xl">
+                {{ budget.category.icon }}
+            </div>
+
+            {% endif %}
+
+            <div>
+
+                <h2 class="text-2xl font-bold">
+                    {{ budget.category.name }}
+                </h2>
+
+                <p class="text-base-content/60">
+                    Monthly budget
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Information -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+
+            <!-- Amount -->
+
+            <div>
+
+                <p class="text-sm text-base-content/60">
+                    Budget amount
+                </p>
+
+                <p class="text-2xl font-bold mt-1">
+                    ₹ {{ budget.amount|floatformat:2 }}
+                </p>
+
+            </div>
+
+
+            <!-- Period -->
+
+            <div>
+
+                <p class="text-sm text-base-content/60">
+                    Period
+                </p>
+
+                <p class="text-xl font-semibold mt-1">
+                    {{ budget.get_month_display }} {{ budget.year }}
+                </p>
+
+            </div>
+
+
+            <!-- Category -->
+
+            <div>
+
+                <p class="text-sm text-base-content/60">
+                    Category
+                </p>
+
+                <p class="font-medium mt-1">
+                    {{ budget.category.name }}
+                </p>
+
+            </div>
+
+
+            <!-- Created -->
+
+            <div>
+
+                <p class="text-sm text-base-content/60">
+                    Created
+                </p>
+
+                <p class="font-medium mt-1">
+                    {{ budget.created_at|date:"M d, Y H:i" }}
+                </p>
+
+            </div>
+
+
+            <!-- Last updated -->
+
+            <div>
+
+                <p class="text-sm text-base-content/60">
+                    Last updated
+                </p>
+
+                <p class="font-medium mt-1">
+                    {{ budget.updated_at|date:"M d, Y H:i" }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="flex flex-wrap justify-end gap-3 mt-8 pt-6 border-t border-base-300">
+
+            <a href="{% url 'budgets:list' %}" class="btn btn-outline">
+                ← Back
+            </a>
+
+            <a href="{% url 'budgets:update' budget.pk %}" class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'budgets:delete' budget.pk %}" class="btn btn-error btn-outline">
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
