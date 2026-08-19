@@ -37,6 +37,7 @@ LOCAL_APPS = [
     "apps.incomes",
     "apps.dashboard",
     "apps.budgets",
+    "apps.savings",
     "theme"
 ]
 

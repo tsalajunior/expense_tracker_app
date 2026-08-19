@@ -1,0 +1,235 @@
+{% extends "base/dashboard_base.html" %}
+
+{% block title %}
+Create Savings Goal
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl mx-auto">
+
+    <!-- Header -->
+
+    <div class="mb-8">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+
+                <h1 class="text-3xl font-bold">
+                    Create Savings Goal
+                </h1>
+
+                <p class="text-base-content/70 mt-1">
+                    Set a target and start planning your savings.
+                </p>
+
+            </div>
+
+            <a href="{% url 'savings:list' %}" class="btn btn-ghost">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Form -->
+
+    <div class="card bg-base-100 shadow-xl">
+
+        <div class="card-body">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                <div class="alert alert-error mb-6">
+
+                    <div>
+
+                        {% for error in form.non_field_errors %}
+
+                        <p>{{ error }}</p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- Title -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-semibold">
+                            Goal Title
+                        </span>
+
+                    </label>
+
+                    {{ form.title }}
+
+                    {% for error in form.title.errors %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-error">
+                            {{ error }}
+                        </span>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Target Amount -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-semibold">
+                            Target Amount
+                        </span>
+
+                    </label>
+
+                    {{ form.target_amount }}
+
+                    {% for error in form.target_amount.errors %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-error">
+                            {{ error }}
+                        </span>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Saved Amount -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-semibold">
+                            Saved Amount
+                        </span>
+
+                    </label>
+
+                    {{ form.saved_amount }}
+
+                    {% for error in form.saved_amount.errors %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-error">
+                            {{ error }}
+                        </span>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Target Date -->
+
+                <div class="form-control mb-5">
+
+                    <label class="label">
+
+                        <span class="label-text font-semibold">
+                            Target Date
+                        </span>
+
+                    </label>
+
+                    {{ form.target_date }}
+
+                    {% for error in form.target_date.errors %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-error">
+                            {{ error }}
+                        </span>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-control mb-6">
+
+                    <label class="label">
+
+                        <span class="label-text font-semibold">
+                            Description
+                        </span>
+
+                    </label>
+
+                    {{ form.description }}
+
+                    {% for error in form.description.errors %}
+
+                    <label class="label">
+
+                        <span class="label-text-alt text-error">
+                            {{ error }}
+                        </span>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Actions -->
+
+                <div class="flex justify-end gap-3">
+
+                    <a href="{% url 'savings:list' %}" class="btn btn-outline">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-outline btn-primary">
+                        Create Goal
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

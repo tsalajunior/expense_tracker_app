@@ -71,6 +71,184 @@
 
     </div>
 
+    <!-- Savings Goals -->
+
+    <div class="flex items-center justify-between mb-4 mt-8">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+            <div class="stat bg-base-100 shadow-md rounded-box">
+
+                <div class="stat-title">
+                    Active Goals
+                </div>
+
+                <div class="stat-value text-primary">
+                    {{ total_savings_goals }}
+                </div>
+
+            </div>
+
+
+            <div class="stat bg-base-100 shadow-md rounded-box">
+
+                <div class="stat-title">
+                    Saved
+                </div>
+
+                <div class="stat-value text-success">
+                    ₹ {{ total_saved_amount|floatformat:2 }}
+                </div>
+
+            </div>
+
+
+            <div class="stat bg-base-100 shadow-md rounded-box">
+
+                <div class="stat-title">
+                    Overall Progress
+                </div>
+
+                <div class="stat-value">
+                    {{ savings_progress_percentage|floatformat:0 }}%
+                </div>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h2 class="text-xl font-bold">
+                Savings Goals
+            </h2>
+
+            <p class="text-sm text-base-content/60">
+                Track your savings progress
+            </p>
+
+        </div>
+
+        <a href="{% url 'savings:list' %}" class="btn btn-sm btn-ghost">
+            View All
+        </a>
+
+    </div>
+
+
+    {% if recent_savings_goals %}
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        {% for goal in recent_savings_goals %}
+
+        <div class="card bg-base-100 shadow-md">
+
+            <div class="card-body">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+
+                        <h3 class="font-bold text-lg">
+                            {{ goal.title }}
+                        </h3>
+
+                        <p class="text-sm text-base-content/60">
+                            Target:
+                            {{ goal.target_date|date:"M d, Y" }}
+                        </p>
+
+                    </div>
+
+
+                    {% if goal.is_completed %}
+
+                    <span class="badge badge-success">
+                        Completed
+                    </span>
+
+                    {% elif goal.is_overdue %}
+
+                    <span class="badge badge-error">
+                        Overdue
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge badge-primary">
+                        In progress
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="mt-4">
+
+                    <div class="flex justify-between text-sm">
+
+                        <span>
+                            ₹ {{ goal.saved_amount|floatformat:2 }}
+                        </span>
+
+                        <span>
+                            ₹ {{ goal.target_amount|floatformat:2 }}
+                        </span>
+
+                    </div>
+
+
+                    <progress class="progress progress-primary w-full mt-2" value="{{ goal.progress_percentage }}"
+                        max="100"></progress>
+
+
+                    <div class="text-right text-sm mt-1">
+
+                        {{ goal.progress_percentage|floatformat:0 }}%
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-actions justify-end mt-3">
+
+                    <a href="{% url 'savings:detail' goal.pk %}" class="btn btn-sm btn-outline">
+                        View
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="card bg-base-100 shadow-md">
+
+        <div class="card-body text-center py-8">
+
+            <p class="text-base-content/60">
+                You don't have any savings goals yet.
+            </p>
+
+            <a href="{% url 'savings:create' %}" class="btn btn-primary btn-sm mt-3">
+                Create Savings Goal
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
     <!-- Recent Transactions -->
 
     <div class="card bg-base-100 shadow-md">
@@ -176,6 +354,7 @@
         </div>
 
     </div>
+
 
     <!-- Quick Actions -->
 
