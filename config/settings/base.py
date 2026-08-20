@@ -38,6 +38,7 @@ LOCAL_APPS = [
     "apps.dashboard",
     "apps.budgets",
     "apps.savings",
+    "apps.alerts",
     "theme"
 ]
 
