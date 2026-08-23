@@ -1,0 +1,232 @@
+{% extends "base/dashboard_base.html" %}
+
+
+{% block title %}
+Alerts | Expense Tracker
+{% endblock %}
+
+
+{% block breadcrumbs %}
+
+<div class="breadcrumbs text-sm mb-4">
+    <ul>
+        <li>
+            <a href="{% url 'dashboard:dashboard' %}">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            Alerts
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+<!-- Header -->
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+    <div>
+
+        <h1 class="text-3xl font-bold">
+            Alerts
+        </h1>
+
+        <p class="text-base-content/60 mt-1">
+            Stay informed about your budgets and savings goals.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Alerts -->
+
+{% if alerts %}
+
+<div class="space-y-4">
+
+    {% for alert in alerts %}
+
+    <div class="
+                        card
+                        bg-base-100
+                        shadow-sm
+                        border
+                        {% if alert.severity == 'danger' %}
+                            border-error/40
+                        {% elif alert.severity == 'warning' %}
+                            border-warning/40
+                        {% else %}
+                            border-info/40
+                        {% endif %}
+                    ">
+
+        <div class="card-body">
+
+            <div class="flex items-start gap-4">
+
+                <!-- Icon -->
+
+                <div class="shrink-0">
+
+                    {% if alert.severity == "danger" %}
+
+                    <div class="w-12 h-12 rounded-full bg-error/10 text-error flex items-center justify-center text-xl">
+                        ⚠️
+                    </div>
+
+                    {% elif alert.severity == "warning" %}
+
+                    <div
+                        class="w-12 h-12 rounded-full bg-warning/10 text-warning flex items-center justify-center text-xl">
+                        ⚠️
+                    </div>
+
+                    {% else %}
+
+                    <div class="w-12 h-12 rounded-full bg-info/10 text-info flex items-center justify-center text-xl">
+                        ℹ️
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Content -->
+
+                <div class="flex-1 min-w-0">
+
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+
+                        <h2 class="font-semibold text-lg">
+                            {{ alert.title }}
+                        </h2>
+
+
+                        <div class="flex flex-wrap items-center gap-2 mt-4">
+
+                            {% if not alert.is_read %}
+
+                            <form method="post" action="{% url 'alerts:mark_as_read' alert.pk %}">
+
+                                {% csrf_token %}
+
+                                <button type="submit" class="btn btn-sm btn-ghost">
+                                    Mark as read
+                                </button>
+
+                            </form>
+
+                            {% endif %}
+
+
+                            <a href="{% url 'alerts:delete' alert.pk %}" class="btn btn-sm btn-ghost text-error">
+                                Delete
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="text-base-content/70 mt-2">
+                        {{ alert.message }}
+                    </p>
+
+
+                    <div class="mt-4 text-sm text-base-content/50">
+
+                        {{ alert.created_at|date:"M d, Y · H:i" }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- Pagination -->
+
+{% if is_paginated %}
+
+<div class="flex justify-center mt-8">
+
+    <div class="join">
+
+        {% if page_obj.has_previous %}
+
+        <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn">
+            «
+        </a>
+
+        {% endif %}
+
+
+        <span class="join-item btn btn-active">
+            Page {{ page_obj.number }}
+            of
+            {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+        <a href="?page={{ page_obj.next_page_number }}" class="join-item btn">
+            »
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% else %}
+
+<!-- Empty State -->
+
+<div class="card bg-base-100 shadow-sm border border-base-300">
+
+    <div class="card-body items-center text-center py-16">
+
+        <div class="text-6xl mb-4">
+            🔔
+        </div>
+
+
+        <h2 class="text-2xl font-bold">
+            No alerts
+        </h2>
+
+
+        <p class="text-base-content/60 mt-2 max-w-md">
+            You don't have any alerts at the moment.
+            We'll notify you when something requires your attention.
+        </p>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

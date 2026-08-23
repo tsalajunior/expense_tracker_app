@@ -7,10 +7,12 @@ from itertools import chain
 from apps.expenses.models import Expense
 from apps.incomes.models import Income
 from apps.savings.models import SavingsGoal
+from apps.alerts.services.alert_generator import AlertGenerator
 
 
 @login_required
 def index(request):
+    AlertGenerator.generate_for_user(request.user)
 
     today = timezone.localdate()
 
