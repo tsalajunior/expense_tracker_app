@@ -39,7 +39,7 @@ LOCAL_APPS = [
     "apps.budgets",
     "apps.savings",
     "apps.alerts",
-    "theme"
+    "theme",
 ]
 
 THIRD_PARTY_APPS = [
@@ -102,8 +102,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.request",
                 "apps.core.context_processors.app_settings",
+                "apps.alerts.context_processors.unread_alert_count",
             ],
         },
     },
@@ -189,4 +189,3 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-
