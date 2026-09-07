@@ -39,6 +39,7 @@ LOCAL_APPS = [
     "apps.budgets",
     "apps.savings",
     "apps.alerts",
+    "apps.recurring",
     "theme",
 ]
 

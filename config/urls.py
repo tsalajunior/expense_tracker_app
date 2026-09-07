@@ -31,6 +31,7 @@ urlpatterns = [
     path("budgets/", include("apps.budgets.urls")),
     path("savings/", include("apps.savings.urls")),
     path("alerts/", include("apps.alerts.urls")),
+    path("recurring/", include("apps.recurring.urls")),
 ]
 
 if settings.DEBUG:
